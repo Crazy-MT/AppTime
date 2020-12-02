@@ -2,6 +2,7 @@ package com.mt.time;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -25,7 +26,11 @@ public class FloatWindowUtils {
         layoutParams.width = LayoutParams.WRAP_CONTENT;
         layoutParams.height = LayoutParams.WRAP_CONTENT;
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-        layoutParams.type = LayoutParams.TYPE_PHONE;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            layoutParams.type = LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            layoutParams.type = LayoutParams.TYPE_PHONE;
+        }
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL | LayoutParams.FLAG_NOT_FOCUSABLE;
         LAYOUTPARAMS = layoutParams;
